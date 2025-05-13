@@ -1,12 +1,17 @@
 from aiogram import Router, types
-from utils.db.models import User  
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import CommandStart
+from aiogram.fsm.context import FSMContext
+from keyboards import inline
+
+from lang import languages
+from utils.db.models import User
 
 router = Router()
 
 @router.message(CommandStart())
-async def register_user(message: types.Message):
-    user, created = await User.get_or_create(
+async def do_start(message: types.Message, state: FSMContext):
+    await state.clear()
+    await User.get_or_create(
         id=message.from_user.id,
         defaults={
             "username": message.from_user.username,
@@ -14,7 +19,4 @@ async def register_user(message: types.Message):
             "last_name": message.from_user.last_name,
         }
     )
-    if created:
-        await message.answer("✅ Siz ro‘yxatdan o‘tdingiz!")
-    else:
-        await message.answer("🔹 Siz allaqachon ro‘yxatdan o‘tgansiz.")
+    await message.reply(languages["start"], reply_markup=inline.langs_kb)
