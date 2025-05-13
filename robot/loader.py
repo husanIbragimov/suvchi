@@ -13,4 +13,4 @@ dp = Dispatcher()
 
 async def init_db():
     await Tortoise.init(config=DATABASE_CONFIG)
-    await Tortoise.generate_schemas()
+    # await Tortoise.generate_schemas()
