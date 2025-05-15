@@ -1,8 +1,11 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv  # pip install python-dotenv
 
 load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 ADMIN_ID = os.getenv('ADMIN_ID').split(', ')

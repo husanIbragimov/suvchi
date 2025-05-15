@@ -5,6 +5,7 @@ from keyboards import inline
 
 from lang import languages
 from utils.db.models import User
+from utils.states import UserState
 
 router = Router()
 
@@ -19,4 +20,5 @@ async def do_start(message: types.Message, state: FSMContext):
             "last_name": message.from_user.last_name,
         }
     )
+    await state.set_state(UserState.lang)
     await message.reply(languages["start"], reply_markup=inline.langs_kb)

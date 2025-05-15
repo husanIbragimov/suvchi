@@ -1,7 +1,7 @@
 import asyncio
 
 from callbaks import pagination
-from handlers.users import start
+from handlers.users import start, set_language, user_register
 from loader import bot, dp, init_db
 from middlewares.throttling import ThrottlingMiddleware
 from utils.bot_start import on_startup_notify
@@ -18,6 +18,8 @@ async def main():
 
     dp.include_routers(
         start.router,
+        set_language.router,
+        user_register.router,
         pagination.router,
     )
 

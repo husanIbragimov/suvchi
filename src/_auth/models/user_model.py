@@ -14,10 +14,11 @@ class User(models.Model):
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
     lang = models.CharField(max_length=2, default="uz", choices=LANG)
+    is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "users"
 
     def __str__(self):
-        return self.username
+        return f"{self.full_name} - {self.phone_number}"

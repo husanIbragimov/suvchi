@@ -10,6 +10,7 @@ class User(Model):
     first_name = fields.CharField(max_length=255, null=True)
     last_name = fields.CharField(max_length=255, null=True)
     lang = fields.CharField(max_length=2, default="uz", choices=[("en", "English"), ("ru", "Russian"), ("uz", "Uzbek")])
+    is_active = fields.BooleanField(default=False)
     created_at = fields.DatetimeField(auto_now_add=True)
 
     class Meta:
